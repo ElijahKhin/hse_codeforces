@@ -1,19 +1,13 @@
 # --- PROJECT S21_CAT ---
-NAME = t08
+NAME = bin
 
-SRC = old_main.cc
+SRC = main.cc
 
 OBJ_FOLDER = obj
 OBJ = $(SRC:%.c=$(OBJ_FOLDER)/%.o)
 
 CC = g++
-FLAGS = -std=c++20 -Werror -Wextra -Wall -I.
-
-# --- TESTING S21_CAT ---
-TCC = g++
-TESTS = s21_cat_tests.cc
-TESTS_BIN = tests_bin_s21_cat
-GCOV_REPORT_NAME = tests_coverage_s21_cat
+FLAGS = -std=c++20  -I.
 
 # --- COLORS FOR A GOOD-LOOKING ASSEMBLING ---
 GREEN = \033[32m
@@ -44,9 +38,3 @@ fclean:
 
 re: fclean all
 .PHONY: re
-
-#leaks: tests
-#	@make leaks -C ../s21_common/
-#	@leaks -quiet --atExit -- ./$(TESTS_BIN)
-#.PHONY: leaks
-#

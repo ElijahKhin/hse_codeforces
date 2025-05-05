@@ -1,39 +1,80 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <numeric>
+#include <queue>
+
+#define LIMIT 1000000
+
+//static inline void print_queue(std::queue<int> q) {
+//	while (!q.empty()) {
+//		std::cout << q.front() << ' ';
+//		q.pop();
+//	}
+//	std::cout << '\n'; 
+//}
+
+static inline void read_data(std::queue<int>& first, std::queue<int>& second) {
+	for(int i = 0; i < 5; ++i) {
+		int ch;
+		std::cin >> ch;
+		first.push(ch);
+	}
+	std::cin.ignore();
+	for(int i = 0; i < 5; ++i) {
+		int ch;
+		std::cin >> ch;
+		second.push(ch);
+	}
+}
+
+static inline bool isEmpty(std::queue<int>& first, std::queue<int>& second, int i) {
+	if (first.empty()) {
+		std::cout << "second" << ' ' << i << '\n';
+		return 1;
+	}
+	if (second.empty()) {
+		std::cout << "first" << ' ' << i << '\n';
+		return 1;
+	}
+	return 0;
+}
+
+static inline void play_move(std::queue<int>& winner, std::queue<int>& loser, int order) {
+	if (order) {
+		winner.push(loser.front());
+		winner.push(winner.front());
+	}
+	else {
+		winner.push(winner.front());
+		winner.push(loser.front());
+	}
+	winner.pop();
+	loser.pop();
+}
 
 int main() {
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
-
-	int n;
-	std::cin >> n;
-	std::vector<int> a(n);
-	std::vector<int> even, odd;
-
-	for (int i = 0; i < n; ++i) {
-		int val;
-		std::cin >> val;
-		if (val % 2 == 0) {
-			even.push_back(val);
+	
+	std::queue<int> first;
+	std::queue<int> second;
+	
+	read_data(first, second);
+	for(int i = 0; i < LIMIT; ++i) {
+		if (isEmpty(first, second, i)) {
+			return 0;
+		}
+		if (first.front() > second.front()) {
+			if (first.front() == 9 && second.front() == 0)
+				play_move(second, first, 1);
+			else 
+				play_move(first, second, 0);
 		}
 		else {
-			odd.push_back(val);
+			if (first.front() == 0 && second.front() == 9)
+				play_move(first, second, 0);
+			else 
+			play_move(second, first, 1);
 		}
-		a[i] = val;
 	}
-	if (!odd.size() || !even.size()) {
-		for (int j = 0; j < n; ++j) {
-			std::cout << a[j] << ' ';
-		}
-		return 0;
-	}
-	else {
-		std::sort(a.begin(), a.end());
-		for (auto& i : a) {
-			std::cout << i << ' ';
-		}
-		std::cout << '\n';
-	}
+	std::cout << "botva\n";
 }
