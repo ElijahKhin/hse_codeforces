@@ -1,0 +1,7 @@
+total 176
+-rwxr-xr-x  1 khin  staff    76K May 11 22:39 bin*
+-rw-r--r--  1 khin  staff   1.4K May 11 22:39 main.cc
+-rw-r--r--  1 khin  staff   789B May 11 19:42 Makefile
+-rw-r--r--  1 khin  staff   182B May 11 19:41 test.cc
+drwxr-xr-x  2 khin  staff    64B May 11 22:16 obj/
+-rw-r--r--  1 khin  staff     0B May 11 22:39 r
